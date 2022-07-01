@@ -1,0 +1,12 @@
+- name: playbook for tag
+  hosts: all
+  tasks:
+    - name: tasks for webserver
+      debug:
+        msg: webserver is running.
+      tags: webserver
+    
+    - name: tasks for webapp
+      debug:
+        msg: webapp is runnig 
+      tags: webapp 

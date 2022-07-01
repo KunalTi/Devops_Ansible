@@ -1,0 +1,23 @@
+- name: privilages
+  hosts: all
+  #become: yes
+  tasks:
+    - name: print current user 
+      shell: id 
+      register: demo 
+      become: yes
+
+    - name: current user 
+      debug: 
+        msg: "{{demo.stdout}}"
+
+    
+    - name: print current user 
+      shell: id 
+      register: demo 
+
+    - name: current user 
+      debug: 
+        msg: "{{demo.stdout}}"
+
+  

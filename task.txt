@@ -1,0 +1,5 @@
+1. Inventory file 
+2. Multi os role 
+3. Decrypt Vault and use in role 
+4. Ansible galaxy 
+5. complete 3 tier architecture 

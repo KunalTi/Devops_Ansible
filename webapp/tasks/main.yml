@@ -1,0 +1,29 @@
+
+- name: download java
+  package:
+    name: "{{item}}"
+    state: present
+  loop:
+    # - epel-release
+    - java 
+  
+- name: download tomcat 
+  unarchive:
+    src: "{{tomcat_url}}"
+    dest: "{{tomcat_dir}}"
+    remote_src: True
+
+# - name: copy context.xml 
+#   # become: yes
+#   template:
+#     src: "context.xml"
+#     dest: "{{tomcat_dir}}/conf/context.xml"
+#     force: yes
+
+- name: copy war file
+  get_url:
+    url: https://tomcat-bucket-war.s3.amazonaws.com/studentapp-2.2-SNAPSHOT.war
+    dest: "{{tomcat_dir}}/webapps"  
+
+- name: start Tomcat
+  shell: "{{tomcat_dir}}/bin/catalina.sh run"

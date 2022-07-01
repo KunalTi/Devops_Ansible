@@ -1,0 +1,14 @@
+- name: conditions in ansible 
+  hosts: all 
+  tasks:
+    - name: run this task on Amazon 
+      debug:
+        msg: task is running on Amazon
+      when: (ansible_distribution == "Amazon" and ansible_distribution_major_version <= "1") or (ansible_os_family=="RedHat")
+
+    - name: run this task on centos
+      debug:
+        msg: task is running on centos
+      when: ansible_distribution == "Centos"
+  
+    

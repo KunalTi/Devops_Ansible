@@ -1,0 +1,8 @@
+- name: copy files
+  hosts: all
+  become: yes
+  tasks: 
+    - name: copy 
+      copy:
+        src: /home/ec2-user/abc.conf
+        dest: /etc/httpd/abc.conf

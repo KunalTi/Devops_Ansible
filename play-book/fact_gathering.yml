@@ -1,0 +1,15 @@
+- name: fact_gathering 
+  hosts: all
+  # gather_facts: false
+  tasks:
+    - name: linux_distribution
+      debug:
+        msg: 
+          - the node belongs to {{ansible_distribution}} distribution.
+          - the node belongs to {{ansible_os_family}} family.
+          - Version is {{ansible_distribution_version}}
+          - The IPV4 address of node {{ansible_eth0.ipv4.address}}.
+          
+          
+
+  

@@ -1,0 +1,7 @@
+- name: My play
+  hosts: all
+  debugger: on_skipped
+  tasks:
+    - name: Execute a command
+      ansible.builtin.command: "true"
+      when: False
