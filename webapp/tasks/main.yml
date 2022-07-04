@@ -23,7 +23,11 @@
 - name: copy war file
   get_url:
     url: https://tomcat-bucket-war.s3.amazonaws.com/studentapp-2.2-SNAPSHOT.war
-    dest: "{{tomcat_dir}}/webapps"  
+    dest: "{{tomcat_dir}}/webapps"
+
+- name: rename
+  command: mv /{{tomcat_dir}}/webapps/studentapp-2.2-SNAPSHOT /{{tomcat_dir}}/webapps/studentapp
+  ignore_errors: true
 
 - name: start Tomcat
-  shell: "{{tomcat_dir}}/bin/catalina.sh run"
+  shell: "nohup {{tomcat_dir}}/bin/catalina.sh start"

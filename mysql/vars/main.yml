@@ -1,0 +1,4 @@
+USERNAME: admin
+PASSWORD: admin@123
+DB_CONNECTOR: localhost
+DATABASE: studentapp

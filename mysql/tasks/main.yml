@@ -1,0 +1,58 @@
+- name: download mysql
+  yum:
+    name: "{{item}}"
+    state: present
+    update_cache: yes
+  loop:
+    - mysql
+    - MySQL-python
+    - mariadb-server
+
+- name: copy mysqlconnector
+  get_url:
+    url: https://dev.mysql.com/downloads/file/?id=510642
+    dest: "{{tomcat_dir}}/lib/"
+
+- name: copy context.xml 
+  template:
+    src: "context.xml"
+    dest: "{{tomcat_dir}}/conf/context.xml"
+
+- name: copy cnf
+  copy:
+    src: .my.cnf
+    dest: /root/
+
+- name: start mysql service
+  service: 
+    name: mariadb
+    state: started
+
+- name: Create a new database 
+  mysql_db:
+    name: studentapp
+    state: present
+
+- name: Create database user 
+  mysql_user:
+    name: admin
+    password: admin@123
+    priv: '*.*:ALL'
+    state: present
+
+- name: copy dump.sql
+  copy:
+    src: dump.sql
+    dest: /tmp
+
+- name: creating table
+  mysql_db: 
+    name: studentapp
+    state: import
+    target: /tmp/dump.sql
+
+- name: stop Tomcat
+  shell: "nohup {{tomcat_dir}}/bin/catalina.sh stop"
+
+- name: start Tomcat
+  shell: "nohup {{tomcat_dir}}/bin/catalina.sh start"

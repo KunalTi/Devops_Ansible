@@ -19,3 +19,10 @@
   service:
     name: httpd
     state: started
+
+# handlers:
+#   - name: sham
+#     become: yes
+#     service:
+#       name: httpd
+#       state: restarted
